@@ -1,0 +1,328 @@
+*************************************
+
+//pune
+
+db.Bank.insert( {
+Account_Number   :"100SN001",
+Balance:1000,
+
+Customer_Details:{
+    Cust_id:1,
+    Cust_Name:"Ram",
+    Street: "Blue Hill",
+    City:"Pune",
+    Loan_Amount:800,
+   
+},
+
+Branch_Details :{
+    Br_Name: "Shivaji nagar",
+    Br_City: "Pune",
+    Assets:25000
+}
+})
+
+*******************************
+
+//pune
+
+db.Bank.insert( {
+Account_Number   :"100SN002",
+Balance:800,
+
+Customer_Details:{
+    Cust_id:1,
+    Cust_Name:"Srinath",
+    Street: "Triveni nagar",
+    City:"Pune",
+   Deposit_Amount: 600
+   
+},
+
+Branch_Details :{
+    Br_Name: "Shivaji nagar",
+    Br_City: "Pune",
+    Assets:25000
+}
+})
+
+**********************************************
+//pune
+db.Bank.insert( {
+Account_Number   :"100NI001",
+Balance:750,
+
+Customer_Details:{
+    Cust_id:1,
+    Cust_Name:"Avadhut",
+    Street: "Shri nagar",
+    City:"Pune",
+    Deposit_Amount: 700,
+    Loan_Amount:200
+},
+
+Branch_Details :{
+    Br_Name: "Nigdi",
+    Br_City: "Pune",
+    Assets:35000
+}
+})
+    
+****************************************************************************
+//chennai
+
+db.Bank.insert( {
+Account_Number   :"100TN001",
+Balance:5000,
+
+Customer_Details:{
+    Cust_id:1,
+    Cust_Name:"Vignesh",
+    Street: "Pondy Bazar",
+    City:"Chennai",
+    Loan_Amount:700
+    
+},
+
+Branch_Details: {
+    Br_Name: "T nagar",
+    Br_City: "Chennai",
+    Assets:30000
+}
+})
+
+****************************************************************************
+//chennai
+
+db.Bank.insert( {
+Account_Number   :"100TN002",
+Balance:10000,
+
+Customer_Details:{
+    Cust_id:1,
+    Cust_Name:"Varun",
+    Street: "Pondy Bazar",
+    City:"Chennai",
+    Loan_Amount:1000
+    
+},
+
+Branch_Details: {
+    Br_Name: "T nagar",
+    Br_City: "Chennai",
+    Assets:100000
+}
+})
+
+
+****************************************************************************
+//chennai
+
+db.Bank.insert( {
+Account_Number   :"100RM001",
+Balance:400,
+
+Customer_Details:{
+    Cust_id:1,
+    Cust_Name:"Dev",
+    Street: "Nateshan nagar",
+    City:"Chennai",
+    Loan_Amount:800
+    
+},
+
+Branch_Details: {
+    Br_Name: "Ramapuram",
+    Br_City: "Chennai",
+    Assets:30000
+}
+})
+
+
+
+*************************************
+//hyd
+
+db.Bank.insert( {
+Account_Number   :"100CC001",
+Balance:500,
+
+Customer_Details :{
+    Cust_Id:1,
+    Cust_Name:"Shree",
+    Street: "Hurrey Hills",
+    City:"Hyderabad",
+    Loan_Amount:700,
+    Deposit_Amount: 900
+},
+
+Branch_Details :{
+    Br_Name: "Chandni Chowk",
+    Br_City: "Hyderabad",
+    Assets:10000
+}
+})
+
+*****************************************
+//hyd
+
+db.Bank.insert( {
+Account_Number   :"100CC001",
+Balance:2000,
+
+Customer_Details:{
+    Cust_Id:1,
+    Cust_Name:"Amit",
+    Street: "China Town",
+    City:"Hyderabad",
+    Loan_Amount:700,
+    Deposit_Amount: 900
+},
+
+Branch_Details :{
+    Br_Name: "Charminar",
+    Br_City: "Hyderabad",
+    Assets:80000
+}
+})
+
+*****************************
+//hyd
+
+db.Bank.insert( {
+Account_Number   :"100CC002",
+Balance:2000,
+
+Customer_Details:{
+    Cust_Id:1,
+    Cust_Name:"Amir",
+    Street: "China Town",
+    City:"Hyderabad",
+   
+    Deposit_Amount: 8000
+},
+
+Branch_Details :{
+    Br_Name: "Charminar",
+    Br_City: "Hyderabad",
+    Assets:80000
+}
+})
+
+***********************************QUERIES*************************
+
+
+    db.Bank.find()
+
+//[2]. Create index on primary key(s)
+
+         db.Bank.createIndex({"Customer_Details.Cust_Id":1,Account_Number :1})
+
+
+
+//[3]. The names and cities of all borrowers
+
+        db.Bank.aggregate( [{$match:{"Customer_Details.Loan_Amount":{$exists:true}}},
+        { $project :{"Customer_Details.Cust_Name":1,"Customer_Details.City":1}}
+        ])
+
+
+
+//[4]. The names of borrowers who live in Chennai. 
+
+	db.Bank.aggregate([{$match:{"Customer_Details.Loan_Amount":{$exists:true}}},
+	{$match:{"Customer_Details.City":"Chennai"}}])
+
+
+//[5]. Find the name, city, and assets of the branch with the largest assets.
+ 
+	db.Bank.find({},{"Branch_Details.Br_Name":1,"Branch_Details.Br_City":1})
+        .sort({"Branch_Details.Assets":-1}).limit(1)
+
+
+ 
+//[6]. The names and cities of customers who have a loan at Pune branch. 
+
+	db.Bank.aggregate([{$match:{"Customer_Details.Loan_Amount":{$exists:true}}},
+	{$match:{"Customer_Details.City":"Pune"}},{ $project : { "Customer_Details.Cust_Name":1,
+        "Customer_Details.City":1 } }])
+
+
+    
+//[7]. Find the number of accounts with balances between 700 and 900. 
+
+	db.Bank.find({ $and: [{Balance:{$gte:700}},{Balance:{$lte:900}}]}).count()
+
+
+//[8]. The names of customers with both accounts and loans at Pune branch. 
+ 
+	db.Bank.find({ $and: [{Account_Number :{$exists:true}},{"Customer_Details.Loan_Amount":
+        {$exists:true}},{"Customer_Details.City":"Pune"}]}).count()
+    
+    
+//[9]. The customers whose total loans are greater than the total amount in their bank accounts
+  
+        db.Bank.find("this.Customer_Details.Loan_Amount > this.Balance")
+    
+
+//[10]. The names of customers living on streets with names ending in "Hill". 
+
+        db.Bank.aggregate([{ $match:  {"Customer_Details.Street":
+	{$regex:/Hill$/i,$options:"x"} } },
+	{ $project : { "Customer_Details.Cust_Name":1}
+	}])  
+
+    
+//[11]. The names of customers with an account but not a loan at Pune branch. 
+
+ 
+       db.Bank.aggregate([{$match:{Account_Number :{$exists:true}}},
+	{$match:{"Customer_Details.Loan_Amount":{$exists:false}}},
+	{$match:{"Customer_Details.City":"Pune"}},
+	{ $project : { "Customer_Details.Cust_Name":1}
+	}])
+
+
+//[12]. The names of branches whose assets are greater than the assets of all branches in    Hyderabad.
+	
+
+	db.Bank.find({ },{"Branch_Details.Br_Name":1}).
+	sort({"Branch_Details.Assets":-1}).limit(1)
+
+
+
+
+----------
+var assets=db.Bank.find({"Branch_Details.Br_City": "Hyderabad"},{"Branch_Details.Assets":1})
+
+db.Bank.find({$Where:{"this.Branch_Details.Assets"!=assets}},{"Branch_Details.Br_Name":1})
+
+
+-------------------
+//[13].	 The branch with the largest average balance.
+
+       	db.Bank.aggregate([
+ 	{ $group : { _id : "$Branch_Details.Br_Name",
+ 	avgAmount: {$avg: { $multiply:  "$Balance"}}
+ 	}},{
+        $sort: { avgAmount: -1 } // sort by avgAmount descending
+        },
+        {
+        $limit: 1 // only return one document
+      } ] )
+
+
+
+//[14].	 The branch name and number of customers for each branch
+       
+	db.Bank.aggregate([
+ 	{ $group : { _id : "$Branch_Details.Br_Name",NumberOfCustomer:{"$sum":1}}} ] )
+ 
+
+
+//[15]	 Deposit an additional Rs. 20,000 to Ram’s bank account. 
+
+	db.Bank.update(
+        {  "Customer_Details.Cust_Name":"Ram" },
+        {$inc:{Balance:20000}}
+        )
