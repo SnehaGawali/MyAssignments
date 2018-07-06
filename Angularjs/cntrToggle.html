@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html >
+	<head>
+	
+		<script src="D:\angular.min.js"> </script>
+		<script>
+function myFunction() {
+    var x = document.getElementById("cnt");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+			<!--	<script>
+		var app=angular.module("myApp",[]);
+
+		app.controller("myCtrl",function($scope){
+	
+			$scope.sqrRoot=function()
+			{
+				return Math.sqrt($scope.value);
+			}
+		$scope.abs=function(){
+			return Math.abs($scope.value);
+		}
+		
+		});	
+		 
+		</script-->
+	</head>
+	<body ng-App="myApp" ng-controller="myCtrl"  >
+	<button onclick="myFunction()">Toggle</button>
+	<div id="cnt">
+	<br />
+	<h3>Phones</h3>
+	<br />
+	Apple
+	<br />
+
+	Samsung
+	<br />
+    Redmi
+    
+	</body>
+
+
+
+
+
+</html>

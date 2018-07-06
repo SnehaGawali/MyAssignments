@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html >
+	<head>
+	
+		<script src="D:\angular.min.js"> </script>
+		<style>
+	table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+	}
+	th, td {
+    padding: 15px;
+	}
+</style>
+				<script>
+		var app=angular.module("myApp",[]);
+
+		app.controller("myCtrl",function($scope){
+
+			$scope.students=
+			{
+				name : 'ranju',
+				subjects:[
+				{name:'sql',marks:80},
+				
+				{name:'java',marks:70},
+				{name:'c#',marks:90
+				}],
+				total:function()
+				{
+					var sum=0;
+					for(var i=0;i<$scope.students.subjects.length;i++)
+					{
+					sum=sum+$scope.students.subjects[i].marks;
+				    }
+				    return sum;
+			     },
+			   average:function()
+			   { 
+				var sum=0;
+				for(var i=0;i<$scope.students.subjects.length;i++)
+				{
+					sum=sum+$scope.students.subjects[i].marks;
+				}
+
+				var avg=sum/$scope.students.subjects.length;
+				return avg;
+			    }
+		    }
+
+			});	            
+	</script>
+	</head>
+
+	<body ng-App="myApp" ng-controller="myCtrl"  >
+
+	<h2>Subject Details</h2>
+	<br/>
+	
+
+	<fieldset>
+ 	 <legend>Student Details  </legend>	
+    <br />
+ 	Student Name : {{students.name|uppercase}}
+	<br />
+    <br />
+    <table>
+	<tr>
+	
+	<th>Subject </th>
+	<th>Marks</th>
+	</tr>
+	
+	<tr ng-repeat="subject in students.subjects|orderBy:'-marks'">
+
+	<td >{{subject.name}}</td>
+	<td >{{subject.marks}}</td>
+	
+	</tr>
+	</table>
+
+	<br />
+    <br />
+     Average of marks : {{students.average()}}
+     <br />
+    <br /
+     Total of marks : {{students.total()}}
+ 	</fieldset>
+	</form>	
+
+	<!--
+
+	<div ng-repeat="mark in students.subjects"> 
+     value at index position {{$index+1}} is {{mark.marks}}
+    </div>-->
+   
+	</body>
+</html>

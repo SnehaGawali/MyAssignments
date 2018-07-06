@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html >
+	<head>
+	
+		<script src="D:\angular.min.js"> </script>
+				<script>
+		var app=angular.module("myApp",[]);
+
+		app.controller("myCtrl",function($scope){
+	            
+
+			$scope.fact=function()
+			{ 
+				var fact=1;
+				for(var i=1;i<=$scope.value;i++)
+				{
+					fact=fact*i;
+				}	
+				$scope.Res=fact;			
+				return fact;
+			}
+		
+		});	
+		 
+		</script>
+	</head>
+	<body ng-App="myApp" ng-controller="myCtrl"  >
+
+
+	<form>
+ 	<fieldset>
+ 	 <legend> To Compute Factorial  </legend>
+ 	
+    <br />
+ 	Enter Value<input type="text" ng-model="value" /> 
+	<br />
+    <br />
+    Factorial is<input type="text" ng-model="Res" /> 
+    <br />
+    <br />
+    <input type="submit" ng-click="fact()" value="Compute Factorial" />   	
+	<br />
+    <br />
+ 	</fieldset>
+	</form>
+
+
+	
+   <!-- Factorial of entered number is : {{fact()}}-->
+
+	</body>
+</html>

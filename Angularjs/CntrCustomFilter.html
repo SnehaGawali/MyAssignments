@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html >
+	<head>
+	<title>AngularJs Custom filters</title>
+		<script src="D:\angular.min.js"> </script>
+	<script type="text/javascript" >
+
+		var app=angular.module("customFilterApp",[]);
+
+		app.controller("customFIlterController",function($scope){
+				$scope.name=[10,20,30];		
+		});	
+	app.filter("convertUpper",function(){
+				return function(name)	
+				{
+					var re=name.reverse()
+					return re;
+				};	
+		});	
+		 
+		</script>
+		
+ </div>
+ </head>
+ 	<body ng-App="customFilterApp" ng-controller="customFIlterController">
+ 		
+ 		<p>{{name|convertUpper}}</p>
+				
+	</body>
+</html>

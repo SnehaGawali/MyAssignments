@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="D:\angular.min.js">
+	
+		</script>
+		<style>
+	table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+	}
+	th, td {
+    padding: 15px;
+	}
+</style>
+	</head>
+	<body ng-App="" ng-init="employee=[{empId : 'e1001',empName:'Ram',basicpay:2000},{empId : 'e1002',empName:'Ranji',basicpay:4000},{empId : 'e1003',empName:'anji',basicpay:2000}]">
+	
+	<h2>Employee Table</h2>
+	<br/>
+	<table>
+	<tr>
+	<th>Employee Id</th>
+	<th>Employee Name</th>
+	<th>Basic Pay</th>
+	</tr>
+	<tr ng-repeat="employ in employee|orderBy:'-empName'"><!-- > orderBy:'empName'
+	or employ.empName:true is also valid-->
+	<td >{{employ.empId}}</td>
+	<td >{{employ.empName}}</td>
+	<td >{{employ.basicpay}}</td>
+	
+	</tr>
+	<!--<tr>
+	<td>{{employee[0].empId}}</td>
+	<td>{{employee[0].empName}}</td>
+	<td>{{employee[0].basicpay}}</td>
+	</tr>
+	<tr>
+	<td>{{employee[1].empId}}</td>
+	<td>{{employee[1].empName}}</td>
+	<td>{{employee[1].basicpay}}</td>
+	</tr>
+	</table>-->
+
+
+	</body>
+</html>
+
+
+<!--DOCTYPE html>
+<html>
+	<head>
+		<script src="D:\angular.min.js">
+	
+		</script>
+	</head>
+	<body ng-App="" ng-init="marks=[10,20,30]">
+	Mark1 : {{ marks[0]}} <br />
+	Mark2 : {{ marks[1]}} <br />
+	Mark3 : {{ marks[2]}} <br />
+	
+    
+
+
+	</body>
+</html>__>

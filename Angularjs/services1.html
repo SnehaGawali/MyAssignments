@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="D:\angular.min.js" ></script>
+<script type="text/javascript">
+
+var app=angular.module("angularcustomFilterApp",[]);
+
+app.controller("customCtrl",function($scope,Calc){
+	
+$scope.sqrt=function(){
+	return Calc.sqrt($scope.value);
+}
+});
+app.service('Calc',function(){
+	this.sqrt=function(a){
+		return Math.sqrt(a);
+	}
+});
+		
+</script>
+</head>
+<body ng-App="angularcustomFilterApp" ng-controller="customCtrl">
+	Enter number : <input type="number" ng-model="value">
+
+	<p> Square root : {{sqrt()}}</p>
+</body>
+</html>

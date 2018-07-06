@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="D:\angular.min.js">
+	
+		</script>
+	</head>
+	<body ng-App="" ng-init="marks=[10,20,30,40,50]">
+	<!--Mark1 : {{ marks[0]}} <br />
+	Mark2 : {{ marks[1]}} <br />
+	Mark3 : {{ marks[2]}} <br />-->
+
+	<div ng-repeat="mark in  marks|orderBy:mark:true">{{mark}}</div>
+	
+    
+
+
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html >
+	<head>
+	
+		<script type="text/javascript" src="D:\angular.min.js"> </script>
+		<div ng-App="myApp" ng-controller="myCtrl">
+		<h1 ng-mousemove="myFunc($event)">Mouse over me!!</h1>
+		<p>Co-Ordinates:{{x+','+y}}</p>
+ </div>
+ </head>
+ 	<body   >
+				<script>
+		var app=angular.module("myApp",[]);
+
+		app.controller("myCtrl",function($scope){
+	
+			$scope.myFunc=function(e)
+			{
+				$scope.x=e.clientX;
+				$scope.y=e.clientY;
+			}
+		
+		
+		});	
+		 
+		</script>
+	</body>
+</html>

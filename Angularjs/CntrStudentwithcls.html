@@ -1,0 +1,65 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="D:\angular.min.js"> </script>
+<style>
+	table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+	}
+	th, td {
+    padding: 15px;
+	}
+</style>
+ <script type="text/javascript" src="CntrClsstud.js"></script>
+</head>
+<body ng-App="studentsApp" ng-controller="studentsCtrl"  >
+
+	<h2>Student Details</h2>
+	<br/>
+	
+
+	<fieldset>
+ 	 <legend>Student Details  </legend>	
+    <br />
+    <div ng-repeat="student in students">
+ 	Student Name : {{student.name|uppercase}}
+	<br />
+    <br />
+    <table>
+	<tr>
+	
+	<th>Subject </th>
+	<th>Marks</th>
+	</tr>
+	
+	<tr ng-repeat="subject in student.subjects|orderBy:'-marks'">
+
+	<td >{{subject.name}}</td>
+	<td >{{subject.marks}}</td>
+	
+	</tr>
+	</table>
+
+	<br />
+    <br />
+     Average of marks : {{student.average()|number:2}}
+     <br />
+    <br />
+     Total of marks : {{student.total()}}
+
+
+     </div>
+      <br />
+   
+     Maximum avg : {{maxi()}}
+ 	</fieldset>
+	</form>	
+
+	
+   
+	</body>
+	</html>
